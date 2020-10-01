@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gallery</title>
+
+    <link rel="stylesheet" href="css/layout.css">
+
+</head>
+
+<body>
+
+    <h1>Snapshots</h1>
+
+    <ul>
+        <li>
+            <a href="img/fireworks.jpg" title="fireworks display" onclick="showPic(this); return false;">fireworks</a>
+        </li>
+        <li>
+            <a href="img/coffee.jpg" title="cup of tea" onclick="showPic(this); return false;">coffee</a>
+        </li>
+        <li>
+            <a href="img/rose.jpg" title="red rose" onclick="showPic(this); return false;">Rose</a>
+        </li>
+        <li>
+            <a href="img/bigben.jpg" title="clock" onclick="showPic(this); return false;">Big ben</a>
+        </li>
+    </ul>
+
+    <img id="placeholder" src="img/placeholder.gif" alt="my img gallery">
+
+    <p id="description"> Choose on image.</p>
+
+    <script src="js/showPic.js"></script>
+</body>
+
+</html>
