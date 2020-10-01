@@ -35,7 +35,7 @@ function countBodyChilren() {
 
 ----操作元素节点
 获取文档中的某个元素
-document.getElementById/Name/ClassName/TagName('id/Name/ClassName/TagName');
+document.getElement(s)ById/Name/ClassName/TagName('id/Name/ClassName/TagName');
 
 ---操作对象节点
 获取对象（元素）的属性值

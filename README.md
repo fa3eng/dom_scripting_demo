@@ -61,7 +61,7 @@ DOM把一份文档表示为一棵树，网页中有的元素有父元素，子�
 
 #### getElementById
 
-* 语法`document.getElementById('ID')`
+* 语法`document.getElementsById('ID')`
 * 返回值：返回一个对象，在document对象中仅有的元素（ID是唯一的）
 
 #### getElementByTagName
@@ -72,7 +72,7 @@ DOM把一份文档表示为一棵树，网页中有的元素有父元素，子�
 小练习：如果只想知道` id `属性值是` purchase `的元素包含着多少个列表项，该如何写
 
 ```js
-let arr = document.getElementById('purchase').getElementByTagName('*');
+let arr = document.getElementById('purchase').getElementsByTagName('*');
 
 alert(arr.length);
 
@@ -81,7 +81,7 @@ tips：`*`是通配符，一点要加上引号，和乘法符号做区别
 
 #### getElementByClassName
 
-* 语法`document.getElementByClassName('class')`
+* 语法`document.getElementsByClassName('class')`
 * 返回值：具有相同类名元素的数组
 
 ### 获取和设置属性
