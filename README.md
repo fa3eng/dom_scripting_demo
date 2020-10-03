@@ -148,5 +148,115 @@ description.firstChild.nodeValue = 'xxx';
 
 ```
 
+---
+## JavaScript和HTML代码分离
 
+在上面学习的过程中我们在HTML界面中使用了`onclick()`，这是一个事件处理函数，我们应该将JavaScript代码和HTML代码分离。
+
+### 使用匿名函数调用onclick函数
+
+```js
+
+object.onclick = function (){
+
+    //function body
+
+}
+
+```
+
+当我们点击`object`这个元素节点的时候，我们就会调用后面匿名函数里面的操作
+
+具体demo请看chapter4和chapter6的区别
+
+---
+
+## 共享onload事件
+
+网页在加载完成之后会触发一个onload事件，这个事件与Windows对象相互关联
+
+### onload事件的使用方法
+
+* 将一个函数绑定在onload上
+  ```js
+
+    windows.onload = xxx; //xxx为一个函数
+
+  ```
+
+现在我们就将一个函数绑定在了onload上
+
+* 将多个函数绑定在onload上
+  ```js
+
+    Windows.onload = function() {
+        xxx;//函数
+        sss;//函数
+    }
+
+  ```
+
+这种方法使用了匿名函数，很方便，不过有个更骚的——addLoadEvent
+
+方法步骤：
+
+1. 把现有的 window.onload 事件处理函数的值存入变量 `oldonload`。
+2. 如果在这个处理函数上还没有绑定任何函数，就像平时那样把新函数添加给它。
+3. 如果在这个处理函数上已经绑定了一些函数，就把新函数追加到现有指令的末尾。
+
+```js
+
+function addLoadEvent(func) {
+    let oldonload = windows.onload();
+
+    if(typeof windows.onload != 'function'){
+
+        windows.onload = func;
+
+    } else {
+
+        wimdows.onload = function () {
+
+            oldonload;
+            func;
+
+        }
+
+    }
+
+}
+
+```
+
+在页面加载完毕之后执行的函数创建一个队列，如果还想添加函数进去，我们只需要使用以下代码即可
+
+`addLoadEvent(firstFunction)`
+
+`addLoadEvent(secondFunction)`
+
+## DOM Core 和 HTML-DOM
+
+转载：
+
+> ### 什么是DOM？
+>
+> DOM （Document Object Model文档对象模型）是 W3C（万维网联盟）的标准。
+>
+> DOM 定义了访问 HTML 和 XML 文档的标准：
+>
+> >  “W3C 文档对象模型 （DOM） 是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式。”
+>
+> W3C DOM 标准被分为 3 个不同的部分：
+>
+> - 核心 DOM - 针对任何结构化文档的标准模型
+> - XML DOM - 针对 XML 文档的标准模型
+> - HTML DOM - 针对 HTML 文档的标准模型
+
+### 二者的区别
+
+说白了DOM Core是核心，而HTML-DOM是DOM Core的扩展。
+
+HTML——DOM定义了一些方法，使得我们调用DOM更加的方便
+
+等对于DOM Core的写法掌握了以后再学习HTML-DOM，现在学习我怕混淆
 
