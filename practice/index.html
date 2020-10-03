@@ -17,7 +17,28 @@
         <li>练习3</li>
     </ul>
 
-    <script src="js/practice.js"></script>
+    <!-- 
+        点击标签，打开弹窗
+        使用onclick没有将JavaScript和html文档分离
+    -->
+    <a href="https://www.baidu.com" onclick="openWin(this); return false;">test</a>
+
+    <!-- 
+        点击标签，打开弹窗方法二
+     -->
+
+    <a href="https://www.baidu.com" onclick="openWin2(this.href); return false;">方法二</a>
+
+
+
+    <!-- 
+        分离JavaScript
+      -->
+
+    <a href="https://www.baidu.com" id="winOpen">test3</a>
+
 </body>
+
+<script src="js/practice.js"></script>
 
 </html>
