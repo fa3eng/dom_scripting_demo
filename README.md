@@ -260,3 +260,131 @@ HTML——DOM定义了一些方法，使得我们调用DOM更加的方便
 
 等对于DOM Core的写法掌握了以后再学习HTML-DOM，现在学习我怕混淆
 
+---
+## 动态创建标记
+
+### 传统方法介绍
+
+#### document.write
+
+例子 `document.write('<p>this is inserted.</p>')`
+
+结果：我们可以直接在web浏览器中看见这一行
+
+
+#### innerHTML属性
+
+该属性能用来读、写某给定元素中的HTML内容。
+
+```html
+
+<div id="testDiv">
+
+    <p>
+      this is <em>my</em> content. 
+    </p>
+
+</div>
+
+```
+
+如果使用DOM的眼光来看待上述代码的话应该是如此的
+
+![以DOM的眼光来看待上述代码](README.assets/以DOM的眼光来看待上述代码.png)
+
+
+如果我们使用DOM来进行访问的话，我们可以对这个DOM树种的所有节点进行访问，然而使用innerHTML属性来说的话，将会简单的多
+
+![以innerHTML的眼光来看待](README.assets/以innerHTML的眼光来看待.png)
+
+该属性的优点：
+
+当我们需要将一大段东西放进去的时候这就是一个很方便的方法：
+```js
+
+window.onload = function(){
+
+  let testDiv = document.getElementById('testDiv');
+  testDiv.innerHTML = ' <p>this is <em>my</em> content. </p>'
+
+}
+
+```
+
+审查元素的结果如下
+
+![核查元素结果](README.assets/核查元素结果.png)
+
+
+注意： 
+
+* 一旦使用`innerHTML`这个方法我们无法区分`插入一段HTML内容`还是`替换一段HTML内容`，一旦你使用了，那么该元素下的所有东西都会被替换
+* `innerHTML`方法不会返回任何对刚插入的内容的引用，换句话说如果想要操作刚插入的节点，那么你还是需要使用DOM提供的方法。
+
+### DOM方法
+
+问题导入： 我们想要添加一个p元素节点，并且将这个节点作为div元素的一个子节点。（div元素已经有了一个子节点，那是一个id属性节点，值是`testDiv`）
+
+结果方法：
+
+1. 创建一个新的元素节点
+2. 将创建出来的元素节点连接到DOM树上（连接到id值为`testDiv`的元素节点后）
+
+#### createElement方法
+
+语法：`document.createElement(nodeName)`
+
+**作用：在文档中创建一个元素节点**
+
+实例：步骤一的结果方案：`document.createElement('p')` 
+
+刚刚我们说过使用`innerHTML`属性的话没有返回值，所以说我们使用`createElement`方法会有一个返回值，其返回的是这个新创建出来的元素节点的引用`let tag_p = document.createElement('p')`
+
+`tag_p`就是该元素节点的引用
+
+当我们创建出来了元素节点之后，并不会在浏览器中显示，因为我们并没有把这个元素节点合并到DOM树当中去，浏览器遍历了一遍DOM树没有发现我们新创建的节点。我们将这种情况称之为文档碎片（document fragment）。
+
+不过此时该节点已经有了其相应的DOM属性
+
+#### appendChild方法
+
+语法：`parent.appendChild(child)`
+
+**作用就是将一个新创建的节点插入到DOM树种的某个节点（parent）**
+
+实例：步骤二的结果方案：`testDiv.appendChild(tag_p)`
+
+
+##### tips：
+
+我们使用插入的时候如果要插入某一个节点的子节点中，我们需要注意一下，其字节点不一定都是元素节点，因此我们如果要插入到元素节点的后面的话我们需要使用通配符将获得所有的元素节点，然后获得长度，最后再选择`长度-1`的子节点作为插入的节点
+
+例子：书上的156页有详细的情况说明
+
+
+#### createTextNode方法
+
+语法：`document.createTextNode(text)`
+
+**作用：在文档中创建一个文本节点**
+
+#### insertBefore方法
+
+语法：`parentElement.insertBefore(newElement, targetElement)`
+
+**作用：将一个新元素插入到一个现有元素的前面**
+
+其中我们比如告诉这个方法三件事情
+
+* 新元素：你想要插入的元素`newElement`
+* 目标元素：你想要把新元素插入到哪一个元素`tagetElement`元素之前
+* 父元素：目标元素的父元素`parentElement`
+
+我们不需要搞清楚父元素是谁，我们可以使用`Element.parentNode`这个方式来找到父元素
+
+
+#### 在现有的元素后插入一个新元素
+
+DOM中没有定义`insertAfter()`方法而这个方法需要我们自己实现。
+
+![insertAfter方法](README.assets/insertAfter方法.png)
