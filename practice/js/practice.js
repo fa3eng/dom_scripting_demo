@@ -1,6 +1,10 @@
-window.onload = function () {
+let para = document.getElementById('example');
 
-    let testDiv = document.getElementById('testDiv');
-    testDiv.innerHTML = ' <p>this is <em>my</em> content. </p>'
+alert(typeof para.nodeName); //
+alert(typeof para.style);
 
-}
+alert('this color is ' + para.style.color);
+alert('the font family is ' + para.style.fontFamily);
+
+
+para.style.color = 'black';
