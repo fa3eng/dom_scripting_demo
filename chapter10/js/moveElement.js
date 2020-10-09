@@ -1,31 +1,20 @@
-let moment;
-let elem = document.getElementById('message');
-
-function positionMessage() {
-
-    elem.style.position = 'absolute';
-    elem.style.top = '100px';
-    elem.style.left = '50px';
-
-    moveElement('message', 200, 100, 10);
-
-    return true;
-
-}
-
-
 /**
  *  move a Element.
- * @constructor
- * @param {string} elementID
- * @param {string} final_x
- * @param {string} final_y 
- * @param {string} interval
+ * @function
+ * @param {string} elementID        元素的ID
+ * @param {string} final_x          终点坐标x
+ * @param {string} final_y          终点坐标y
+ * @param {string} interval         时间间隔
  */
 
 function moveElement(elementID, final_x, final_y, interval) {
 
     let elem = document.getElementById(elementID);
+
+    // 检测elem的movement属性
+    if (elem.movement) {
+        clearTimeout(elem.movement);
+    }
 
     let xpos = parseInt(elem.style.left);
     let ypos = parseInt(elem.style.top);
@@ -34,17 +23,30 @@ function moveElement(elementID, final_x, final_y, interval) {
         return true;
     }
 
-    if (xpos < final_x) xpos++;
-    if (xpos > final_x) xpos--;
-    if (ypos < final_y) ypos++;
-    if (ypos > final_y) ypos--;
+    let dist;
+
+    if (xpos < final_x) {
+        dist = Math.ceil((final_x - xpos) / 10);
+        xpos += dist;
+    }
+    if (xpos > final_x) {
+        dist = Math.ceil((xpos - final_x) / 10);
+        xpos -= dist;
+    }
+    if (ypos < final_y) {
+        dist = Math.ceil((final_y - ypos) / 10);
+        ypos += dist;
+    };
+    if (ypos > final_y) {
+        dist = Math.ceil((ypos - final_y) / 10);
+        ypos -= dist;
+    }
 
     elem.style.left = xpos + 'px';
     elem.style.top = ypos + 'px';
 
-    setTimeout(function () {
+    // 给elem元素添加一个属性
+    elem.movement = setTimeout(function () {
         moveElement(elementID, final_x, final_y, interval)
     }, interval);
 }
-
-positionMessage();
