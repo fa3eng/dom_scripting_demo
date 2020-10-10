@@ -66,7 +66,7 @@ header nav a:active {
 }
 
 article img {
-    border-color: #ba9;
+    border-color: #edc;
     outline-color: #dcb;
 }
 
@@ -74,4 +74,12 @@ article img {
 
     background-color: transparent;
 
+}
+
+header nav .here:link,
+header nav .here:visited,
+header nav .here:hover,
+header nav .here:active {
+    color: #eef;
+    background-color: #799;
 }
