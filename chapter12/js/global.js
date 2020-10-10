@@ -28,6 +28,8 @@ function hightlightPage() {
 
 function prepareSlideshow() {
 
+    if (!document.getElementById('intro')) return false;
+
     let intro = document.getElementById('intro');
 
     let slideshow = document.createElement('div');
@@ -143,7 +145,68 @@ function moveElement(elementID, final_x, final_y, interval) {
     }, interval);
 }
 
+/**
+ * 遍历一遍about中的nav里面的a标签，根据鼠标的点击事件来调用showSection函数
+ */
+function prepaerInternalnav() {
+
+    if (document.getElementsByTagName('article').length == 0) return false;
+    if (document.getElementsByTagName('nav').length == 0) return false;
+    if (document.getElementsByTagName('ul').length == 0) return false;
+    if (document.getElementsByTagName('li').length == 0) return false;
+    if (document.getElementsByTagName('a').length == 0) return false;
+
+    let article = document.getElementsByTagName('article');
+    let nav = article[0].getElementsByTagName('nav');
+    let ul = nav[0].getElementsByTagName('ul');
+    let link = ul[0].getElementsByTagName('a');
+
+    for (let i = 0; i < link.length; i++) {
+
+        let section = document.getElementsByTagName('section');
+
+        for (let j = 0; j < section.length; j++) {
+            section[j].style.display = 'none';
+        }
+
+        let current_id = link[i].getAttribute('href').split('#')[1];
+        if (!current_id) continue;
+        link[i].destination = current_id;
+
+        link[i].onclick = function () {
+            showSection(this.destination);
+            return false;
+        }
+    }
+}
+
+
+/**
+ * 显示相应的section，通过判断id来控制section的显示
+ * @function
+ * @param {string} id section元素的id
+ */
+function showSection(id) {
+
+    if (!document.getElementsByTagName('section')) return false;
+
+    let section = document.getElementsByTagName('section');
+
+    for (let i = 0; i < section.length; i++) {
+
+        let current_id = section[i].getAttribute('id');
+
+        if (current_id == id) {
+            section[i].style.display = 'block';
+        } else if (current_id != id) {
+            section[i].style.display = 'none';
+        }
+
+    }
+
+}
 
 
 hightlightPage();
 prepareSlideshow();
+prepaerInternalnav();
