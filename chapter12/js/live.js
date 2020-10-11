@@ -93,20 +93,16 @@ function hightLightRow() {
 
     for (let i = 0; i < rows.length; i++) {
 
-        let width_px = rows[i].offsetWidth + 'px';
-
-
         rows[i].onmouseover = function () {
-            console.log(width_px);
+
             this.style.fontWeight = 'bold';
-            console.log(rows[i].childNodes.map);
-            rows[i].childNodes[0] = width_px;
+
         }
 
         rows[i].onmouseout = function () {
-            console.log(width_px);
+
             this.style.fontWeight = 'normal';
-            this.style['width'] = width_px;
+
         }
 
     }
