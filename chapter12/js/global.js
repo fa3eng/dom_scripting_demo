@@ -145,21 +145,50 @@ function moveElement(elementID, final_x, final_y, interval) {
     }, interval);
 }
 
+function fuck(obj, tag) {
+    if (!obj) return false;
+
+    let tmp = undefined;
+    try {
+        tmp = obj.getElementsByTagName(tag);
+    } catch (ex) {
+        return false;
+    }
+    return tmp;
+}
+
+
 /**
  * 遍历一遍about中的nav里面的a标签，根据鼠标的点击事件来调用showSection函数
+ * @function
  */
 function prepaerInternalnav() {
 
-    if (document.getElementsByTagName('article').length == 0) return false;
-    if (document.getElementsByTagName('nav').length == 0) return false;
-    if (document.getElementsByTagName('ul').length == 0) return false;
-    if (document.getElementsByTagName('li').length == 0) return false;
-    if (document.getElementsByTagName('a').length == 0) return false;
+    // if (!document.getElementsByTagName('article')) return false;
+    // if (!document.getElementsByTagName('ul')) return false;
+    // if (!document.getElementsByTagName('li')) return false;
+    // if (!document.getElementsByTagName('a')) return false;
+    // if (!document.getElementsByTagName('article')[0]
+    //     .getElementsByTagName('nav').length)
+    //     return false;
 
-    let article = document.getElementsByTagName('article');
-    let nav = article[0].getElementsByTagName('nav');
-    let ul = nav[0].getElementsByTagName('ul');
-    let link = ul[0].getElementsByTagName('a');
+
+    let article = fuck(document, 'article') || false;
+    let nav = fuck(article[0], 'nav') || false;
+    let ul = fuck(nav[0], 'ul') || false;
+    let link = fuck(ul[0], 'a') || false;
+
+    if (!(article && nav && ul && link)) return false;
+
+    // try {
+    //     article = document.getElementsByTagName('article');
+    //     nav = article[0].getElementsByTagName('nav');
+    //     ul = nav[0].getElementsByTagName('ul');
+    //     link = ul[0].getElementsByTagName('a');
+    // } catch (ex) {
+    //     return false;
+    // }
+
 
     for (let i = 0; i < link.length; i++) {
 
@@ -178,6 +207,7 @@ function prepaerInternalnav() {
             return false;
         }
     }
+
 }
 
 
@@ -208,8 +238,8 @@ function showSection(id) {
 
 
 
-
-
-hightlightPage();
-prepareSlideshow();
-prepaerInternalnav();
+window.onload = function () {
+    hightlightPage();
+    prepareSlideshow();
+    prepaerInternalnav();
+}

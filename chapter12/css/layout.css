@@ -110,3 +110,18 @@ article img {
     display: inline-block;
 
 }
+
+td {
+    padding: .5rem 3rem;
+    /* width: 8em; */
+}
+
+th {
+    color: #edc;
+    background-color: #455;
+}
+
+tr td {
+    color: #223;
+    background-color: #eb6;
+}
