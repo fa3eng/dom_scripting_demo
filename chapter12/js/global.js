@@ -207,6 +207,9 @@ function showSection(id) {
 }
 
 
+
+
+
 hightlightPage();
 prepareSlideshow();
 prepaerInternalnav();
